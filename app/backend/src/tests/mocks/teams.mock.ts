@@ -24,4 +24,10 @@ const teamMock = {
   teamName: "Bahia",
 };
 
-export { teamsMock, teamMock };
+const teamCruzeiroMock = {
+  id: 5,
+  teamName: "Cruzeiro",
+};
+
+
+export { teamsMock, teamMock, teamCruzeiroMock };

@@ -7,6 +7,10 @@ class TeamService {
     const teams = await TeamModel.findAll();
     return teams;
   }
+
+  public static async getTeamById(id: number) {
+    return TeamModel.findById(id);
+  }
 }
 
 export default TeamService;
