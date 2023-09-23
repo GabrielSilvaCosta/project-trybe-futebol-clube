@@ -4,6 +4,6 @@ export type ServiceMessage = {
 
 export type ServiceResponse<T> = {
   status: 'SUCCESSFUL' | 'CREATED' | 'INVALID_DATA' | 'UNAUTHORIZED' |
-  'NOT_FOUND' | 'CONFLICT' | 'UNPROCESSABLE';
+  'NOT_FOUND' | 'CONFLICT' | 'UNPROCESSABLE' | string;
   data: T | ServiceMessage;
 };

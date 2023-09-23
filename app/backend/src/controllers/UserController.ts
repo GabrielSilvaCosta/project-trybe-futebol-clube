@@ -19,4 +19,16 @@ export default class UserController {
       return res.status(500).json({ message: 'Internal server error' });
     }
   }
+
+  public async role(req: Request, res: Response): Promise<Response> {
+    try {
+      const { email } = req.body.userPayload;
+      const serviceResponse = await this.userService.validateToken(email);
+      const { status, data } = serviceResponse;
+      return res.status(mapStatusHTTP(status)).json(data);
+    } catch (error) {
+      console.error(error);
+      return res.status(500).json({ message: 'Internal server error' });
+    }
+  }
 }

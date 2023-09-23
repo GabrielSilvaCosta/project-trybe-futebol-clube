@@ -1,9 +1,11 @@
 import * as sinon from "sinon";
 import * as chai from "chai";
-const chaiHttp = require("chai-http");
+// @ts-ignore
+import chaiHttp = require("chai-http");
 import { app } from "../app";
 import SequelizeUser from "../database/models/SequelizeUser";
 import JWT from "../utils/JWT";
+const jwt = require("jsonwebtoken");
 import Validations from "../middlewares/Validations";
 import {
   mockUser2,
@@ -55,5 +57,26 @@ describe("Teste do LOGIN endpoint", () => {
 
     expect(res.status).to.equal(401);
     expect(res.body.message).to.equal("Invalid email or password");
+  });
+
+  it("Retorna status 401 quando o token não é fornecido", async function () {
+    const httpResponse = await chai.request(app).get("/login/role");
+
+    expect(httpResponse.status).to.equal(401);
+    expect(httpResponse.body.message).to.equal("Token not found");
+  });
+
+  it("Retorna status 401 quando o token não contém a role", async function () {
+    sinon.stub(JWT, "verify").returns({ email: "user@example.com" });
+
+    const httpResponse = await chai
+      .request(app)
+      .get("/login/role")
+      .set("authorization", "Bearer fake-token");
+
+    expect(httpResponse.status).to.equal(401);
+    expect(httpResponse.body.message).to.equal(
+      "Token does not contain user role"
+    );
   });
 });
