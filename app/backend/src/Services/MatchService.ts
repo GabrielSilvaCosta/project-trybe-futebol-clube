@@ -1,5 +1,5 @@
 import MatchModel from '../models/MatchModel';
-import IMatch from '../Interfaces/matches/IMatch';
+import IMatch, { IMatchInput } from '../Interfaces/matches/IMatch';
 import { IMatchModel } from '../Interfaces/matches/IMatchModel';
 import { ServiceResponse } from '../Interfaces/ServiceResponse';
 
@@ -33,6 +33,14 @@ export default class MatchService {
       await this.matchModel.finishMatchById(matchId);
     } catch (error) {
       throw new Error('Erro ao finalizar a partida.');
+    }
+  }
+
+  public async updateMatch(matchId: number, matchInput: IMatchInput): Promise<void> {
+    try {
+      await this.matchModel.updateMatchById(matchId, matchInput);
+    } catch (error) {
+      throw new Error('Erro ao atualizar a partida.');
     }
   }
 }

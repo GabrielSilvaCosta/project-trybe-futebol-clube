@@ -26,4 +26,18 @@ export default class MatchController {
       return res.status(500).json({ error: 'Internal Server Error' });
     }
   }
+
+  public async updateMatch(req: Request, res: Response): Promise<Response> {
+    try {
+      const matchId = parseInt(req.params.id, 10);
+
+      const { homeTeamGoals, awayTeamGoals } = req.body;
+
+      await this.matchService.updateMatch(matchId, { homeTeamGoals, awayTeamGoals });
+
+      return res.status(200).json({ message: 'Updated' });
+    } catch (error) {
+      return res.status(500).json({ error: 'Internal Server Error Updated' });
+    }
+  }
 }
