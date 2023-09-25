@@ -27,4 +27,12 @@ export default class MatchService {
       throw new Error('Erro ao buscar partidas.');
     }
   }
+
+  public async finishMatch(matchId: number): Promise<void> {
+    try {
+      await this.matchModel.finishMatchById(matchId);
+    } catch (error) {
+      throw new Error('Erro ao finalizar a partida.');
+    }
+  }
 }
