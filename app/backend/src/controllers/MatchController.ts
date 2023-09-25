@@ -40,4 +40,15 @@ export default class MatchController {
       return res.status(500).json({ error: 'Internal Server Error Updated' });
     }
   }
+
+  public async createMatch(req: Request, res: Response): Promise<Response> {
+    try {
+      const newMatch = req.body;
+      const serviceResponse = await this.matchService.createMatch(newMatch);
+      const { status, data } = serviceResponse;
+      return res.status(mapStatusHTTP(status)).json(data);
+    } catch (error) {
+      return res.status(500).json({ error: 'Erro interno do servidor' });
+    }
+  }
 }
