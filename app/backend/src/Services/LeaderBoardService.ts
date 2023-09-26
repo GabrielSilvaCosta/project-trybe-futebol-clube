@@ -103,14 +103,16 @@ export default class LeaderBoardService {
 
     const performanceOfTeams = teams.map(({ teamName }) => {
       const teamMatches = finishedMatches.filter(({ awayTeam }) => awayTeam.teamName === teamName);
-      const wins = teamMatches.filter(({ homeTeamGoals, awayTeamGoals }) =>
+      const wins = teamMatches.filter(({ awayTeamGoals, homeTeamGoals }) =>
         awayTeamGoals > homeTeamGoals);
-      const draws = teamMatches.filter(({ homeTeamGoals, awayTeamGoals }) =>
-        homeTeamGoals === awayTeamGoals);
+      const draws = teamMatches.filter(({ awayTeamGoals, homeTeamGoals }) =>
+        awayTeamGoals === homeTeamGoals);
 
       return LeaderBoardService.generateTeam(teamName, teamMatches, wins, draws);
     });
 
-    return { status: 'SUCCESSFUL', data: performanceOfTeams };
+    const orderTeamsAwayPoints = LeaderBoardService.orderTeamsByPoints(performanceOfTeams);
+
+    return { status: 'SUCCESSFUL', data: orderTeamsAwayPoints };
   }
 }
