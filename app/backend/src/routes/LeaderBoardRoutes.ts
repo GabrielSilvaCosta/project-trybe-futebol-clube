@@ -10,4 +10,9 @@ router.get(
   (req: Request, res: Response) => leaderBoardController.getPerformanceTeamsHome(req, res),
 );
 
+router.get(
+  '/away',
+  (req: Request, res: Response) => leaderBoardController.getPerformanceTeamsAway(req, res),
+);
+
 export default router;
