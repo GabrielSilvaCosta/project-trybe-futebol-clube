@@ -30,4 +30,15 @@ export default class LeaderBoardController {
       res.status(500).json({ error: 'Internal Server Error' });
     }
   }
+
+  public async getPerformanceTeamsOverall(req: Request, res: Response): Promise<void> {
+    try {
+      const serviceResponse = await this.leaderBoardService.getPerformanceTeamsOverall();
+      const { status, data } = serviceResponse;
+      res.status(mapStatusHTTP(status)).json(data);
+    } catch (error) {
+      console.error('Error in getPerformanceTeamsOverall:', error);
+      res.status(500).json({ error: 'Internal Server Errors' });
+    }
+  }
 }
