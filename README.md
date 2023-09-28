@@ -20,6 +20,8 @@ Sequelize (ORM)
 MySQL (Banco de Dados)
 JWT (Autenticação)
 Arquitetura Model-Service-Controller
+
+
 Testes no Back-end:
 
 Mocha
